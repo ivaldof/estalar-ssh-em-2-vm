@@ -87,6 +87,7 @@ ssh-keygen
 Para que o R1 possa acessar o R2 via SSH:
 
 criar um arquivo authorized_keys para 2 vm
+sudo nano authorized_keys
 
 Para que o R1 possa acessar o R2 via SSH:
 
