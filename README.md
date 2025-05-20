@@ -86,6 +86,10 @@ ssh-keygen
 
 Para que o R1 possa acessar o R2 via SSH:
 
+criar um arquivo authorized_keys para 2 vm
+
+Para que o R1 possa acessar o R2 via SSH:
+
 ```bash
 ssh-copy-id usuario@192.186.0.11
 ```
