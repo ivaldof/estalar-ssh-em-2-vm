@@ -1,0 +1,47 @@
+como estalar ssh no ubuntu virtualbox em 2 vm
+atalizar os repositorios
+sudo apt-get update
+
+ip da vm r1 192.186.0.10
+ip da vm r1 192.186.0.11
+
+estalar o ssh nas 2 vm ri1 e r2:
+sudo apt-get openssh-server
+
+depois vai na rede cabeada
+colocar os ips com o dns 
+ip da vm r1 192.186.0.10
+ip da vm r1 192.186.0.11
+ip dns 192.186.0.10
+ip rede 192.186.0.1
+desliga as vms 
+e muda a rede de nat para interna das 2 vm
+
+
+pronto agora é so da o ping ou conectar uma vm na outra pelo ssh foncionando 
+ agora para ter mais segurança vamos criar um chave:
+ssh-keygen
+sem criar senha ele cria 2 cheves um publica e outra privada então temos que compartilha
+so a publica para se conectar da vm r1 a r2 
+para colocar a chave publica do r1 no r2 e do r2 no r1 tem que criar um arquivo
+sudo nano authorized_keys
+
+depois o comando para mandar a crave de uma maquina para outra
+ssh-copy-id usuario@192.168.0.11 do r1 para o r2
+ssh-copy-id usuario@192.168.0.10 do r2 para o r1
+
+agora é so ir fazer mais algumas alterações
+sudo nano sshd_conf
+algumas aterações que deve ser feita no arquivo
+criar esse: PermitRootLogin no
+descomenta esses:
+MaxAuthTries 4
+MaxSessions 8
+PubKeyAuthentication yes
+AuthorizedKeysFile .ssh/Authorized_Keys .ssh/Authorized_Keys2
+PasswordAuthetication no
+PermitEmptyPasswords no
+ClientAliveIntral 600
+ClientAlivecuntMax 3
+
+pronto tudo feito
